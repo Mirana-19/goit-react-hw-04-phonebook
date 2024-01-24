@@ -3,8 +3,8 @@ import { ContactForm, ContactList, Filter } from 'components';
 import { useEffect, useState } from 'react';
 
 export function App() {
-  const [contacts, setContacts] = useState(() =>
-    JSON.parse(localStorage.getItem('contacts') || [])
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(localStorage.getItem('contacts')) || []
   );
 
   const [filter, setFilter] = useState('');
