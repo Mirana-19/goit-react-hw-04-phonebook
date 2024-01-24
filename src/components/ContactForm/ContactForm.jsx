@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button, Title } from 'styles/Shared.styles';
 import { Input, Label, Phonebook } from './ContactForm.styled';
 
-export function ContactForm() {
+export function ContactForm({ addContact }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -15,7 +15,7 @@ export function ContactForm() {
   const onSubmit = e => {
     e.preventDefault();
 
-    this.props.addContact({ name, number });
+    addContact({ name, number });
 
     setName('');
     setNumber('');
