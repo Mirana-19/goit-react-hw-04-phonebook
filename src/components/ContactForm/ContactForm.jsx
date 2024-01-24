@@ -1,55 +1,52 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { Button, Title } from 'styles/Shared.styles';
 import { Input, Label, Phonebook } from './ContactForm.styled';
 
-export class ContactForm extends Component {
-  state = {
-    name: '',
-    number: '',
+export function ContactForm() {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
+  const onInputChange = e => {
+    const value = e.target.value;
+
+    e.target.name === 'name' ? setName(value) : setNumber(value);
   };
 
-  onInputChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  onSubmit = e => {
+  const onSubmit = e => {
     e.preventDefault();
-    const { name, number } = this.state;
 
     this.props.addContact({ name, number });
 
-    this.setState({ name: '', number: '' });
+    setName('');
+    setNumber('');
   };
 
-  render() {
-    const { name, number } = this.state;
-    return (
-      <>
-        <Title>Phonebook</Title>
-        <Phonebook onSubmit={this.onSubmit}>
-          <Label>
-            Name
-            <Input
-              value={name}
-              onChange={this.onInputChange}
-              type="text"
-              name="name"
-              required
-            />
-          </Label>
-          <Label>
-            Number
-            <Input
-              value={number}
-              onChange={this.onInputChange}
-              type="tel"
-              name="number"
-              required
-            />
-          </Label>
-          <Button>Add contact</Button>
-        </Phonebook>
-      </>
-    );
-  }
+  return (
+    <>
+      <Title>Phonebook</Title>
+      <Phonebook onSubmit={onSubmit}>
+        <Label>
+          Name
+          <Input
+            value={name}
+            onChange={onInputChange}
+            type="text"
+            name="name"
+            required
+          />
+        </Label>
+        <Label>
+          Number
+          <Input
+            value={number}
+            onChange={onInputChange}
+            type="tel"
+            name="number"
+            required
+          />
+        </Label>
+        <Button>Add contact</Button>
+      </Phonebook>
+    </>
+  );
 }
